@@ -148,6 +148,25 @@ public static void DeleteAll()
   conn.Close();
 }
 
+public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM cities WHERE id = @CityId;", conn);
+
+      SqlParameter CityIdParameter = new SqlParameter();
+      CityIdParameter.ParameterName = "@CityId";
+      CityIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(CityIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 
   }
 }

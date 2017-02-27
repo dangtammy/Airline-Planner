@@ -61,11 +61,31 @@ namespace AirlinePlannerApp
     public void Test_Find_FindCityInDatabase()
     {
       City testCity = new City("Portland");
-      testCity.Save(); 
+      testCity.Save();
 
       City foundCity = City.Find(testCity.GetId());
 
       Assert.Equal(testCity, foundCity);
+    }
+    [Fact]
+    public  void Test_Delete_DeletesCityFromDatabase()
+    {
+      //Arrange
+      string name1 = "Bothell";
+      City testCity1 = new City(name1);
+      testCity1.Save();
+
+      string name2 = "Spokane";
+      City testCity2 = new City(name2);
+      testCity2.Save();
+
+      //Act
+      testCity1.Delete();
+      List<City> resultCity = City.GetAll();
+      List<City> testCityList = new List<City> {testCity2};
+
+      //Assert
+      Assert.Equal(testCityList, resultCity);
     }
  }
 }
