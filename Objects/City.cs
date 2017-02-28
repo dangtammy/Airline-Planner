@@ -168,5 +168,29 @@ public void Delete()
       }
     }
 
+    public List<City> GetCities()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT city_id FROM cities_flight WHERE city_id = @CityId;", conn);
+      SqlParameter cityIdParameter = new SqlParameter();
+      cityIdParameter.ParameterName = "@CityId";
+      cityIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(cityIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<int> cityIds = new List<int> {};
+      while(rdr.Read())
+      {
+        int cityId = rdr.GetInt32(0);
+        cityIds.Add(cityId);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
   }
 }

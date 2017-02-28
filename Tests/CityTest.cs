@@ -87,5 +87,11 @@ namespace AirlinePlannerApp
       //Assert
       Assert.Equal(testCityList, resultCity);
     }
+
+    [Fact]
+    public void Test_GetCities_ReturnCities()
+    {
+      
+    }
  }
 }
